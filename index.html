@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RSA Encryption</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #1f4037, #99f2c8);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        h2 {
+            color: white;
+            font-size: 32px;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        /* Form Container */
+        .container {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            max-width: 400px;
+            width: 90%;
+            animation: slideUp 1.2s ease-in-out;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            transition: 0.3s ease-in-out;
+            font-size: 16px;
+        }
+
+        input:focus, textarea:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+        }
+
+        button {
+            padding: 12px;
+            width: 100%;
+            border: none;
+            border-radius: 8px;
+            background: #007bff;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s ease-in-out;
+        }
+
+        button:hover {
+            background: #0056b3;
+            transform: scale(1.05);
+        }
+
+        /* Animated Encrypted and Decrypted Text */
+        .output-box {
+            background: #f8f9fa;
+            padding: 12px;
+            border-radius: 8px;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+            word-wrap: break-word;
+            animation: fadeIn 1.2s ease-in-out;
+        }
+
+        /* Keyframes for Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h2>RSA Encryption</h2>
+
+    <div class="container">
+        <form method="POST">
+            <label>Enter Message:</label><br>
+            <input type="text" name="message" required><br>
+            <button type="submit" name="encrypt">Encrypt</button>
+        </form>
+
+        {% if encrypted_text %}
+        <h3>Encrypted Text:</h3>
+        <div class="output-box">{{ encrypted_text }}</div>
+
+        <form method="POST">
+            <input type="hidden" name="encrypted_text" value="{{ encrypted_text }}">
+            <button type="submit" name="decrypt">Decrypt</button>
+        </form>
+        {% endif %}
+
+        {% if decrypted_text %}
+        <h3>Decrypted Text:</h3>
+        <div class="output-box">{{ decrypted_text }}</div>
+        {% endif %}
+    </div>
+
+</body>
+</html>
